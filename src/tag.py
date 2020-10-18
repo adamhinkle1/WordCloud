@@ -12,17 +12,23 @@ from nltk.probability import FreqDist
 
 tagCloud = {}
 maxUsed = 0
-filter = 2
+filter = 0
 
 def main():
     global filter
-    #filter lets user decide how focused to make the tag cloud
-    filterInput = input("Minimum number appearences to add word to cloud? (enter to use default: 2):")
-    if not filterInput == "":
-        filter = filterInput
+
+    #filter lets user decide how focused to make the tag cloud. higher integer values will remove 'clutter' low frequency words
+    filterInput = input("Enter minimum occurrences of a word to add to cloud? (default: 2):")
+    try:
+        filterInput = int(filterInput)
+        if (filterInput >= 0):
+            filter = filterInput
+    except ValueError:
+        filter = 2
+        print("Input not recognized, default filter set to 2.")
     #test paragraph
     #word_string = 'oh oh oh oh oh oh verse wrote book stand title book would life superman thats make feel count privilege love ideal honored know feel see everyday things things say rock baby truth rock love rock rock everything need rock baby rock wanna kiss ya feel ya please ya right wanna touch ya love ya baby night reward ya things rock love rock love rock oh oh oh verse try count ways make smile id run fingers run timeless things talk sugar keeps going make wanna keep lovin strong make wanna try best give want need give whole heart little piece minimum talking everything single wish talking every dream rock baby truth rock love rock rock everything need rock baby rock wanna kiss ya feel ya please ya right wanna touch ya love ya baby night reward ya things rock love rock wanna rock bridge theres options dont want theyre worth time cause oh thank like us fine rock sand smile cry joy pain truth lies matter know count oh oh oh oh oh oh rock baby truth rock love rock rock everything need rock baby rock wanna kiss ya feel ya please ya right wanna touch ya love ya baby night reward ya things rock love rock love rock oh oh oh oh oh oh wanna kiss ya feel ya please ya right wanna touch ya love ya baby night reward ya things rock love rock wanna rock party people people party popping sitting around see looking looking see look started lets hook little one one come give stuff let freshin ruff lets go lets hook start wont stop baby baby dont stop come give stuff lets go black culture black culture black culture black culture party people people party popping sitting around see looking looking see look started lets hook come one give stuff let freshin little one one ruff lets go lets hook start wont stop baby baby dont stop come give stuff lets go black culture black culture black culture black culture lets hook come give stuff let freshin little one one ruff lets go lets hook start wont stop baby baby dont stop come give stuff lets go lets hook come give stuff let freshin little one one ruff lets go lets hook start wont stop baby baby dont stop come give stuff lets go black culture black culture black culture black culture black culture black culture black culture black culture'
-    word_string = input("input text to analyze here: \n")
+    word_string = input("Input text to analyze here: \n")
 
     # Path to output html file
     htmlFile = 'index.html'

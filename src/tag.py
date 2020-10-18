@@ -23,6 +23,10 @@ def main():
         filterInput = int(filterInput)
         if (filterInput >= 0):
             filter = filterInput
+            print('Filter set to ' + str(filter) + '.')
+        else:
+            filter = 2
+            print('Cannot accept negative number, default filter set to 2.')
     except ValueError:
         filter = 2
         print("Input not recognized, default filter set to 2.")

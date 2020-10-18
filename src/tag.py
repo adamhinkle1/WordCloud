@@ -111,17 +111,18 @@ def createHTMLFile(tags, outputFilePath):
                 #input html information
                 outputFile.write("<html>")
                 outputFile.write("<h2>TagCloud</h2>")
-                #copy contents from styles onto our output
+                #copy contents from styles onto our output. help with styling from http://sujitpal.blogspot.com/2007/04/building-tag-cloud-with-python.html
                 for line in f:
                     outputFile.write(line)
                 outputFile.write("\n")
                 f.close()
-                for line in f1:#copy contents from tooltip onto our output
+                # copy contents from tooltip onto our output. help with tooltip from https://www.w3schools.com/css/css_tooltip.asp
+                for line in f1:
                     outputFile.write(line)
                 outputFile.write("\n")
                 f1.close()
-
-                for tag in sortedTags: #write our tag cloud out as elements with classes to html
+                # write our tag cloud out as elements with classes to html
+                for tag in sortedTags:
                     fontSizeIndex = getFrequencyWeight(tag)
                     outputFile.write('<span class ="tooltip"><span class = "' + fontSize[fontSizeIndex] + '">' + tag[0]+"   "+ '</span><span class ="tooltiptext">' + str(int(tag[1]*maxUsed)) + '</span ></span>')
                 outputFile.write("</html>")
